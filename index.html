@@ -171,30 +171,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .expo-head{max-width:720px;margin:0 auto 48px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
 .expo-head h2{color:var(--ink)}
 .expo-head p{color:var(--c2);font-size:17px;line-height:28px}
-/* Listing marketing examples */
-.mex{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:auto auto;gap:16px}
-.mex-card{position:relative;margin:0;border-radius:2px;overflow:hidden;background:#0a1218;box-shadow:0 30px 70px -50px rgba(0,0,0,.5)}
-.mex-card .mex-img,.mex-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mex-card .mex-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
-.mex-card:hover .mex-img img{transform:scale(1.06)}
-.mex-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(6,12,18,.82) 100%)}
-.mex-card figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 22px;display:flex;align-items:center;gap:12px;
-  font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:#fff}
-.mex-card .mex-k{font-size:12px;letter-spacing:.14em;color:var(--sand)}
-.mex-badge{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,18,24,.5);backdrop-filter:blur(6px);
-  border:.5px solid rgba(255,255,255,.4);color:#fff;font-family:'Mesmerize',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:2px}
-.mex-badge svg{width:15px;height:15px}
-.mex-video{grid-row:1 / span 2;min-height:440px}
-.mex-card:not(.mex-video){aspect-ratio:4/3}
-@media(max-width:820px){.mex{grid-template-columns:1fr 1fr}.mex-video{grid-row:auto;aspect-ratio:16/10;min-height:0}}
-@media(max-width:520px){.mex{grid-template-columns:1fr}}
-/* auto-scrolling listing-photo marquee */
-.marquee{margin-top:16px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.marquee-track{display:flex;gap:16px;width:max-content;animation:marquee 44s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee img{height:220px;width:auto;border-radius:2px;object-fit:cover;display:block;flex:0 0 auto}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(max-width:640px){.marquee img{height:150px}}
+/* Listing marketing — tabbed showcase (3D tour / video / photography), each a scrollable carousel */
+.show-tabs{display:flex;gap:36px;margin-bottom:24px;border-bottom:1px solid var(--border)}
+.show-tab{padding:0 0 15px;background:none;border:0;position:relative;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--c4);cursor:pointer;transition:color .25s}
+.show-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--navy);transform:scaleX(0);transition:transform .3s var(--ease-out)}
+.show-tab:hover{color:var(--ink)}
+.show-tab.on{color:var(--ink)}
+.show-tab.on::after{transform:scaleX(1)}
+.show-stage{position:relative;height:min(72vh,680px);min-height:460px}
+.show-cat{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .45s var(--ease-out)}
+.show-cat.on{opacity:1;visibility:visible}
+.show-track{display:flex;height:100%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+.show-track::-webkit-scrollbar{display:none}
+.show-slide{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:center;border-radius:2px;overflow:hidden;background:#0a1218;margin:0}
+.show-slide>img,.show-slide>video{width:100%;height:100%;object-fit:cover;display:block}
+.show-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(6,12,18,.72) 100%);pointer-events:none}
+.show-slide .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px 26px;color:#fff;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:11px}
+.show-slide .cap .k{color:var(--sand);font-size:11px;letter-spacing:.14em}
+.show-badge{position:absolute;top:16px;left:16px;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(10,18,24,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:.5px solid rgba(255,255,255,.45);color:#fff;font-family:'Mesmerize',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:2px}
+.show-badge svg{width:14px;height:14px}
+.show-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:48px;height:48px;border-radius:2px;background:rgba(10,18,24,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:.5px solid rgba(255,255,255,.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
+.show-arrow:hover{background:rgba(10,18,24,.82)}
+.show-arrow svg{width:22px;height:22px}
+.show-arrow.prev{left:16px}.show-arrow.next{right:16px}
+.show-count{position:absolute;right:16px;bottom:16px;z-index:3;font-family:'Mesmerize',sans-serif;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+@media(max-width:640px){.show-tabs{gap:22px}.show-tab{font-size:14px}.show-arrow{width:42px;height:42px}}
 /* social reach metrics */
 .reach{margin-top:64px;background:var(--navy-deep);color:#fff;border-radius:2px;padding:clamp(32px,4vw,52px)}
 .reach-head{text-align:center;margin-bottom:36px;display:flex;flex-direction:column;gap:12px;align-items:center}
@@ -424,30 +425,37 @@ footer{background:var(--page);padding:40px 40px 80px;color:var(--c2);font-size:1
       <p>See the calibre of marketing we produce for every listing, the rich media that puts your yacht in front of serious buyers.</p>
     </div>
 
-    <div class="mex casc">
-      <figure class="mex-card mex-video">
-        <video autoplay muted loop playsinline preload="auto" poster="assets/cine-poster.jpg" id="mexVideo"><source src="assets/cine.mp4" type="video/mp4"/></video>
-        <figcaption><span class="mex-k">01</span> Cinematic listing video</figcaption>
-      </figure>
-      <figure class="mex-card">
-        <div class="mex-img"><img src="assets/gallery/interior.jpg" alt="Interactive 3D tour" loading="lazy"/></div>
-        <span class="mex-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg; &middot; 3D tour</span>
-        <figcaption><span class="mex-k">02</span> Interactive 3D tour</figcaption>
-      </figure>
-      <figure class="mex-card">
-        <div class="mex-img"><img src="assets/gallery/riva-profile.jpg" alt="Professional photography" loading="lazy"/></div>
-        <figcaption><span class="mex-k">03</span> Professional photography</figcaption>
-      </figure>
-      <figure class="mex-card">
-        <div class="mex-img"><img src="assets/gallery/promo.jpg" alt="Vessel gallery" loading="lazy"/></div>
-        <figcaption><span class="mex-k">04</span> Vessel imagery &amp; gallery</figcaption>
-      </figure>
-    </div>
-
-    <div class="marquee" aria-label="Sample listing photography">
-      <div class="marquee-track">
-        <img src="assets/gallery/promo.jpg" alt="Listing photo"/><img src="assets/gallery/riva-aerial.jpg" alt="Listing photo"/><img src="assets/gallery/riva-profile.jpg" alt="Listing photo"/><img src="assets/gallery/tahoe-riva.jpg" alt="Listing photo"/><img src="assets/gallery/riva-bow.jpg" alt="Listing photo"/><img src="assets/gallery/aerial.jpg" alt="Listing photo"/><img src="assets/gallery/riva-run.jpg" alt="Listing photo"/>
-        <img src="assets/gallery/promo.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/riva-aerial.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/riva-profile.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/tahoe-riva.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/riva-bow.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/aerial.jpg" alt="" aria-hidden="true"/><img src="assets/gallery/riva-run.jpg" alt="" aria-hidden="true"/>
+    <div class="show">
+      <div class="show-tabs" role="tablist">
+        <button class="show-tab on" data-cat="tour">3D tour</button>
+        <button class="show-tab" data-cat="video">Video</button>
+        <button class="show-tab" data-cat="photo">Photography</button>
+      </div>
+      <div class="show-stage">
+        <div class="show-cat on" data-cat="tour">
+          <div class="show-track">
+            <figure class="show-slide"><img src="assets/gallery/interior.jpg" alt="3D tour, main salon"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">01</span> Interactive 3D tour &middot; Main salon</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/tour-2.jpg" alt="3D tour, helm"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">02</span> Interactive 3D tour &middot; Helm</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/tour-3.jpg" alt="3D tour, owner suite"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">03</span> Interactive 3D tour &middot; Owner&rsquo;s suite</span></figure>
+          </div>
+        </div>
+        <div class="show-cat" data-cat="video">
+          <div class="show-track">
+            <figure class="show-slide"><video autoplay muted loop playsinline preload="auto" poster="assets/cine-poster.jpg"><source src="assets/cine.mp4" type="video/mp4"/></video><span class="cap"><span class="k">01</span> Cinematic listing video</span></figure>
+            <figure class="show-slide"><video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg"><source src="assets/hero.mp4" type="video/mp4"/></video><span class="cap"><span class="k">02</span> Aerial highlight reel</span></figure>
+          </div>
+        </div>
+        <div class="show-cat" data-cat="photo">
+          <div class="show-track">
+            <figure class="show-slide"><img src="assets/gallery/promo.jpg" alt="Photography"/><span class="cap"><span class="k">01</span> Professional photography</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/riva-profile.jpg" alt="Photography"/><span class="cap"><span class="k">02</span> Profile photography</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/riva-aerial.jpg" alt="Photography"/><span class="cap"><span class="k">03</span> Aerial photography</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/tahoe-riva.jpg" alt="Photography"/><span class="cap"><span class="k">04</span> Lifestyle photography</span></figure>
+            <figure class="show-slide"><img src="assets/gallery/riva-bow.jpg" alt="Photography"/><span class="cap"><span class="k">05</span> Detail photography</span></figure>
+          </div>
+        </div>
+        <button class="show-arrow prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="show-arrow next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg></button>
       </div>
     </div>
 
@@ -578,14 +586,27 @@ function onScroll(){if(hdr)hdr.classList.toggle('scrolled',window.scrollY>40);}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
 /* Resilient hero autoplay */
-const hv=document.getElementById('heroVideo');
-const cv=document.getElementById('cineVideo');
-const mv=document.getElementById('mexVideo');
-const vids=[hv,cv,mv].filter(Boolean);
+const vids=[].slice.call(document.querySelectorAll('video'));
 function kick(){vids.forEach(function(v){if(v.paused){v.play().catch(()=>{});}});}
-vids.forEach(function(v){['canplay','loadeddata'].forEach(ev=>v.addEventListener(ev,kick));});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)kick();});
-['click','touchstart','scroll','keydown'].forEach(ev=>window.addEventListener(ev,kick,{once:true,passive:true}));kick();
+vids.forEach(function(v){['canplay','loadeddata'].forEach(function(ev){v.addEventListener(ev,kick);});});
+document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
+['click','touchstart','scroll','keydown'].forEach(function(ev){window.addEventListener(ev,kick,{once:true,passive:true});});kick();
+
+/* Listing marketing — tabbed showcase (3D tour / video / photography) + arrows */
+(function(){
+  var show=document.querySelector('.show');if(!show)return;
+  var tabs=[].slice.call(show.querySelectorAll('.show-tab'));
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(b){b.classList.toggle('on',b===t);});
+    show.querySelectorAll('.show-cat').forEach(function(c){c.classList.toggle('on',c.dataset.cat===t.dataset.cat);});
+    kick();
+  });});
+  function activeTrack(){var c=show.querySelector('.show-cat.on');return c?c.querySelector('.show-track'):null;}
+  function stepW(tr){var s=tr.querySelector('.show-slide');return s?s.getBoundingClientRect().width+16:400;}
+  var prev=show.querySelector('.show-arrow.prev'),next=show.querySelector('.show-arrow.next');
+  prev.addEventListener('click',function(){var tr=activeTrack();if(tr)tr.scrollBy({left:-stepW(tr),behavior:'smooth'});});
+  next.addEventListener('click',function(){var tr=activeTrack();if(tr)tr.scrollBy({left:stepW(tr),behavior:'smooth'});});
+})();
 
 /* Parallax — hero video + cinematic band */
 const heroMedia=document.getElementById('heroMedia');const cineBg=document.getElementById('cineBg');
