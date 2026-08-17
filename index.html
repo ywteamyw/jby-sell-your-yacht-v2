@@ -211,18 +211,25 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @media(max-width:640px){.reach-grid{grid-template-columns:1fr 1fr;gap:14px}}
 /* ===== TESTIMONIALS ===== */
 .tmon{padding:96px 0;background:var(--section)}
-.tmon-head{text-align:center;max-width:680px;margin:0 auto 56px;display:flex;flex-direction:column;gap:14px;align-items:center}
-.tmon-head .eyebrow{color:var(--navy)}
+.tmon-head{text-align:center;margin:0 auto 40px}
 .tmon-head h2{color:var(--ink)}
-.tmon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.tmon-q{padding:0 40px;position:relative;display:flex;flex-direction:column;gap:22px}
-.tmon-q + .tmon-q{border-left:1px solid var(--line)}
-.tmon-q .mark{font-family:'Mesmerize',sans-serif;font-size:46px;line-height:.5;color:var(--sand)}
+.tmon-view{overflow:hidden}
+.tmon-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
+.tmon-track::-webkit-scrollbar{display:none}
+.tmon-q{flex:0 0 33.333%;scroll-snap-align:start;padding:0 40px;display:flex;flex-direction:column;gap:20px;border-left:1px solid var(--line)}
+.tmon-q:first-child{border-left:0}
 .tmon-q blockquote{margin:0;font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:18px;line-height:30px;color:var(--ink)}
 .tmon-q .who{display:flex;flex-direction:column;gap:3px;margin-top:auto}
 .tmon-q .who .nm{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
 .tmon-q .who .bt{font-family:'Myriad Pro',sans-serif;font-size:14px;color:var(--c4)}
-@media(max-width:820px){.tmon-grid{grid-template-columns:1fr;gap:40px}.tmon-q{padding:0}.tmon-q + .tmon-q{border-left:0;border-top:1px solid var(--line);padding-top:40px}}
+.tmon-nav{display:flex;justify-content:center;gap:12px;margin-top:40px}
+.tmon-btn{width:48px;height:48px;border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--ink);background:none;cursor:pointer;transition:border-color .25s,color .25s,opacity .25s}
+.tmon-btn:hover{border-color:var(--navy);color:var(--navy)}
+.tmon-btn:disabled{opacity:.32;cursor:default}
+.tmon-btn:disabled:hover{border-color:var(--border);color:var(--ink)}
+.tmon-btn svg{width:20px;height:20px}
+@media(max-width:900px){.tmon-q{flex-basis:50%}}
+@media(max-width:640px){.tmon-q{flex-basis:88%;padding:0 22px}}
 
 /* ===== CONTACT / VALUATION ===== */
 .contact{padding:16px 0 110px}
@@ -450,29 +457,61 @@ footer{background:var(--page);padding:40px 40px 80px;color:var(--c2);font-size:1
   </div>
 </section>
 
-<!-- TESTIMONIALS (sample copy — replace with real JBY reviews) -->
+<!-- TESTIMONIALS — editorial column slider (sample copy; replace with real JBY reviews).
+     Subtitle is flexible: closed sales use "Sold a [Model] · [Location]";
+     non-sale reviews use a neutral context like "Brokerage consultation · [Location]" or "Repeat client · [Location]". -->
 <section class="tmon" id="testimonials">
   <div class="wrap">
-    <div class="tmon-head">
-      <span class="eyebrow reveal">Owner stories</span>
-      <h2 class="h-sm reveal d1">Sellers who trusted the process</h2>
+    <div class="tmon-head reveal">
+      <h2 class="h-sm">In their words</h2>
     </div>
-    <div class="tmon-grid casc">
-      <figure class="tmon-q">
-        <span class="mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>From valuation to closing, the JBY team handled every detail. They positioned our yacht beautifully and brought us a qualified buyer within weeks.</blockquote>
-        <figcaption class="who"><span class="nm">James H.</span><span class="bt">Sold a Riva 88&rsquo; &middot; Newport Harbor</span></figcaption>
-      </figure>
-      <figure class="tmon-q">
-        <span class="mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>The marketing was in a different league. The photography and video made our yacht look extraordinary, and the whole sale felt effortless.</blockquote>
-        <figcaption class="who"><span class="nm">Margaret &amp; Tom R.</span><span class="bt">Sold a Sirena 68 &middot; San Diego</span></figcaption>
-      </figure>
-      <figure class="tmon-q">
-        <span class="mark" aria-hidden="true">&ldquo;</span>
-        <blockquote>Professional, discreet, and genuinely knowledgeable. Jeff and his team made selling our yacht a genuinely enjoyable experience.</blockquote>
-        <figcaption class="who"><span class="nm">David C.</span><span class="bt">Sold a Pershing 7X &middot; Marina del Rey</span></figcaption>
-      </figure>
+    <div class="tmon-view reveal">
+      <div class="tmon-track" id="tmonTrack">
+        <figure class="tmon-q">
+          <blockquote>From valuation to closing, the JBY team handled every detail. They positioned our yacht beautifully and brought us a qualified buyer within weeks.</blockquote>
+          <figcaption class="who"><span class="nm">James H.</span><span class="bt">Sold a Riva 88&rsquo; &middot; Newport Harbor</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>The marketing was in a different league. The photography and video made our yacht look extraordinary, and the whole sale felt effortless.</blockquote>
+          <figcaption class="who"><span class="nm">Margaret &amp; Tom R.</span><span class="bt">Sold a Sirena 68 &middot; San Diego</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>Professional, discreet, and genuinely knowledgeable. Jeff and his team made selling our yacht a genuinely enjoyable experience.</blockquote>
+          <figcaption class="who"><span class="nm">David C.</span><span class="bt">Sold a Pershing 7X &middot; Marina del Rey</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>They understood exactly what our yacht was worth and found the right buyer, quickly and without any fuss.</blockquote>
+          <figcaption class="who"><span class="nm">Elena V.</span><span class="bt">Sold a Riva 76&rsquo; &middot; Sausalito</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>The valuation consultation alone was worth it. Clear, honest advice with no pressure, and a real sense of the market.</blockquote>
+          <figcaption class="who"><span class="nm">Robert &amp; Lisa M.</span><span class="bt">Brokerage consultation &middot; San Diego</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>They found a buyer faster than we imagined and handled the paperwork from start to finish. Completely seamless.</blockquote>
+          <figcaption class="who"><span class="nm">Michael T.</span><span class="bt">Sold an Axopar 37 &middot; Seattle</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>I came in just to understand my options. I left with a clear plan and complete confidence in the team.</blockquote>
+          <figcaption class="who"><span class="nm">Caroline B.</span><span class="bt">Listing consultation &middot; Newport Harbor</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>Every detail was coordinated beautifully. It genuinely felt like a premium, white-glove service throughout.</blockquote>
+          <figcaption class="who"><span class="nm">Andrew P.</span><span class="bt">Sold a Wally 48 &middot; Charleston</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>Communication was constant and clear. We always knew exactly where we stood at every stage of the sale.</blockquote>
+          <figcaption class="who"><span class="nm">Sophia &amp; Daniel K.</span><span class="bt">Sold a Pershing 5X &middot; Marina del Rey</span></figcaption>
+        </figure>
+        <figure class="tmon-q">
+          <blockquote>This is the second yacht the team has sold for us. We simply wouldn&rsquo;t go anywhere else.</blockquote>
+          <figcaption class="who"><span class="nm">Thomas W.</span><span class="bt">Repeat client &middot; Kona</span></figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="tmon-nav">
+      <button class="tmon-btn prev" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="tmon-btn next" aria-label="More reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg></button>
     </div>
   </div>
 </section>
@@ -695,6 +734,23 @@ document.querySelectorAll('.expo-list').forEach(list=>{
     note.textContent=(name?('Thank you, '+name+'. '):'Thank you. ')+'A Jeff Brown Yachts broker will be in touch within one business day.';
     form.querySelector('button[type=submit]').textContent='Request sent';
   });
+})();
+
+/* Testimonials — editorial column slider (arrows scroll right / left) */
+(function(){
+  var track=document.getElementById('tmonTrack');if(!track)return;
+  var prev=document.querySelector('.tmon-btn.prev'),next=document.querySelector('.tmon-btn.next');
+  function step(){var c=track.querySelector('.tmon-q');return c?Math.round(c.getBoundingClientRect().width):320;}
+  function upd(){
+    var max=track.scrollWidth-track.clientWidth-2;
+    if(prev)prev.disabled=track.scrollLeft<=2;
+    if(next)next.disabled=track.scrollLeft>=max;
+  }
+  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-step(),behavior:'smooth'});});
+  if(next)next.addEventListener('click',function(){track.scrollBy({left:step(),behavior:'smooth'});});
+  track.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
 })();
 </script>
 </body>
