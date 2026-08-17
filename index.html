@@ -168,9 +168,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ===== EXPOSURE (image + checklist) ===== */
 .expo{padding:110px 0}
-.expo-head{max-width:720px;margin:0 auto 48px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center}
-.expo-head h2{color:var(--ink)}
-.expo-head p{color:var(--c2);font-size:17px;line-height:28px}
+.expo-head{max-width:none;margin:0 auto 44px;text-align:center}
+.expo-head h2{color:var(--ink);white-space:nowrap}
+@media(max-width:640px){.expo-head h2{white-space:normal}}
 /* Listing marketing — tabbed showcase (3D tour / video / photography), each a scrollable carousel */
 .show-tabs{display:flex;gap:36px;margin-bottom:24px;border-bottom:1px solid var(--border)}
 .show-tab{padding:0 0 15px;background:none;border:0;position:relative;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--c4);cursor:pointer;transition:color .25s}
@@ -178,24 +178,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .show-tab:hover{color:var(--ink)}
 .show-tab.on{color:var(--ink)}
 .show-tab.on::after{transform:scaleX(1)}
-.show-stage{position:relative;height:min(72vh,680px);min-height:460px}
-.show-cat{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .45s var(--ease-out)}
-.show-cat.on{opacity:1;visibility:visible}
-.show-track{display:flex;height:100%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
-.show-track::-webkit-scrollbar{display:none}
-.show-slide{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:center;border-radius:2px;overflow:hidden;background:#0a1218;margin:0}
-.show-slide>img,.show-slide>video{width:100%;height:100%;object-fit:cover;display:block}
-.show-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(6,12,18,.72) 100%);pointer-events:none}
-.show-slide .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px 26px;color:#fff;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:11px}
-.show-slide .cap .k{color:var(--sand);font-size:11px;letter-spacing:.14em}
+.show-tabs{justify-content:center}
+.show-stage{position:relative;height:min(70vh,660px);min-height:440px;border-radius:2px;overflow:hidden;background:#0a1218}
+.show-stage>img,.show-stage>video{width:100%;height:100%;object-fit:cover;display:block}
 .show-badge{position:absolute;top:16px;left:16px;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(10,18,24,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:.5px solid rgba(255,255,255,.45);color:#fff;font-family:'Mesmerize',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:2px}
 .show-badge svg{width:14px;height:14px}
 .show-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:48px;height:48px;border-radius:2px;background:rgba(10,18,24,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:.5px solid rgba(255,255,255,.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
 .show-arrow:hover{background:rgba(10,18,24,.82)}
 .show-arrow svg{width:22px;height:22px}
 .show-arrow.prev{left:16px}.show-arrow.next{right:16px}
-.show-count{position:absolute;right:16px;bottom:16px;z-index:3;font-family:'Mesmerize',sans-serif;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
-@media(max-width:640px){.show-tabs{gap:22px}.show-tab{font-size:14px}.show-arrow{width:42px;height:42px}}
+.show-word{text-align:center;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:20px;line-height:28px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);margin:22px 0 16px}
+.show-thumbs{display:flex;gap:12px;justify-content:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:2px}
+.show-thumbs::-webkit-scrollbar{display:none}
+.show-thumb{flex:0 0 154px;height:94px;border-radius:2px;overflow:hidden;cursor:pointer;position:relative;opacity:.55;transition:opacity .25s;background:#0a1218;border:0;padding:0}
+.show-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.show-thumb.on{opacity:1;box-shadow:inset 0 0 0 2px var(--navy)}
+.show-thumb:hover{opacity:1}
+@media(max-width:640px){.show-tabs{gap:22px}.show-tab{font-size:14px}.show-arrow{width:42px;height:42px}.show-thumb{flex-basis:112px;height:70px}}
 /* social reach metrics */
 .reach{margin-top:64px;background:var(--navy-deep);color:#fff;border-radius:2px;padding:clamp(32px,4vw,52px)}
 .reach-head{text-align:center;margin-bottom:36px;display:flex;flex-direction:column;gap:12px;align-items:center}
@@ -422,41 +421,17 @@ footer{background:var(--page);padding:40px 40px 80px;color:var(--c2);font-size:1
   <div class="wrap">
     <div class="expo-head reveal">
       <h2 class="h-sm">The exposure your yacht deserves</h2>
-      <p>See the calibre of marketing we produce for every listing, the rich media that puts your yacht in front of serious buyers.</p>
     </div>
 
-    <div class="show">
+    <div class="show reveal">
       <div class="show-tabs" role="tablist">
-        <button class="show-tab on" data-cat="tour">3D tour</button>
-        <button class="show-tab" data-cat="video">Video</button>
-        <button class="show-tab" data-cat="photo">Photography</button>
+        <button class="show-tab on" data-cat="tour">3D Tour</button>
+        <button class="show-tab" data-cat="video">Videos</button>
+        <button class="show-tab" data-cat="photo">Photos</button>
       </div>
-      <div class="show-stage">
-        <div class="show-cat on" data-cat="tour">
-          <div class="show-track">
-            <figure class="show-slide"><img src="assets/gallery/interior.jpg" alt="3D tour, main salon"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">01</span> Interactive 3D tour &middot; Main salon</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/tour-2.jpg" alt="3D tour, helm"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">02</span> Interactive 3D tour &middot; Helm</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/tour-3.jpg" alt="3D tour, owner suite"/><span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span><span class="cap"><span class="k">03</span> Interactive 3D tour &middot; Owner&rsquo;s suite</span></figure>
-          </div>
-        </div>
-        <div class="show-cat" data-cat="video">
-          <div class="show-track">
-            <figure class="show-slide"><video autoplay muted loop playsinline preload="auto" poster="assets/cine-poster.jpg"><source src="assets/cine.mp4" type="video/mp4"/></video><span class="cap"><span class="k">01</span> Cinematic listing video</span></figure>
-            <figure class="show-slide"><video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg"><source src="assets/hero.mp4" type="video/mp4"/></video><span class="cap"><span class="k">02</span> Aerial highlight reel</span></figure>
-          </div>
-        </div>
-        <div class="show-cat" data-cat="photo">
-          <div class="show-track">
-            <figure class="show-slide"><img src="assets/gallery/promo.jpg" alt="Photography"/><span class="cap"><span class="k">01</span> Professional photography</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/riva-profile.jpg" alt="Photography"/><span class="cap"><span class="k">02</span> Profile photography</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/riva-aerial.jpg" alt="Photography"/><span class="cap"><span class="k">03</span> Aerial photography</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/tahoe-riva.jpg" alt="Photography"/><span class="cap"><span class="k">04</span> Lifestyle photography</span></figure>
-            <figure class="show-slide"><img src="assets/gallery/riva-bow.jpg" alt="Photography"/><span class="cap"><span class="k">05</span> Detail photography</span></figure>
-          </div>
-        </div>
-        <button class="show-arrow prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button class="show-arrow next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg></button>
-      </div>
+      <div class="show-stage" id="showStage"></div>
+      <div class="show-word" id="showWord">Interactive 3D tour</div>
+      <div class="show-thumbs" id="showThumbs"></div>
     </div>
 
     <div class="reach reveal">
@@ -586,26 +561,50 @@ function onScroll(){if(hdr)hdr.classList.toggle('scrolled',window.scrollY>40);}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
 /* Resilient hero autoplay */
-const vids=[].slice.call(document.querySelectorAll('video'));
-function kick(){vids.forEach(function(v){if(v.paused){v.play().catch(()=>{});}});}
-vids.forEach(function(v){['canplay','loadeddata'].forEach(function(ev){v.addEventListener(ev,kick);});});
+/* resilient autoplay — re-queries so JS-injected videos are covered too */
+function kick(){[].slice.call(document.querySelectorAll('video')).forEach(function(v){if(v.paused){v.play().catch(function(){});}});}
 document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
-['click','touchstart','scroll','keydown'].forEach(function(ev){window.addEventListener(ev,kick,{once:true,passive:true});});kick();
+['click','touchstart','scroll','keydown'].forEach(function(ev){window.addEventListener(ev,kick,{passive:true});});kick();
 
-/* Listing marketing — tabbed showcase (3D tour / video / photography) + arrows */
+/* Listing marketing — model-page-style gallery: tabs (3D Tour / Videos / Photos) + big hero + thumbnail strip + arrows */
 (function(){
   var show=document.querySelector('.show');if(!show)return;
+  var GAL={
+    tour:{word:'Interactive 3D tour',items:[
+      {type:'img',src:'assets/gallery/interior.jpg',badge:1},
+      {type:'img',src:'assets/gallery/tour-2.jpg',badge:1},
+      {type:'img',src:'assets/gallery/tour-3.jpg',badge:1}
+    ]},
+    video:{word:'Cinematic video',items:[
+      {type:'video',src:'assets/cine.mp4',poster:'assets/cine-poster.jpg'},
+      {type:'video',src:'assets/hero.mp4',poster:'assets/hero-poster.jpg'}
+    ]},
+    photo:{word:'Professional photography',items:[
+      {type:'img',src:'assets/gallery/promo.jpg'},
+      {type:'img',src:'assets/gallery/riva-profile.jpg'},
+      {type:'img',src:'assets/gallery/riva-aerial.jpg'},
+      {type:'img',src:'assets/gallery/tahoe-riva.jpg'},
+      {type:'img',src:'assets/gallery/riva-bow.jpg'}
+    ]}
+  };
+  var stage=document.getElementById('showStage'),word=document.getElementById('showWord'),thumbs=document.getElementById('showThumbs');
   var tabs=[].slice.call(show.querySelectorAll('.show-tab'));
-  tabs.forEach(function(t){t.addEventListener('click',function(){
-    tabs.forEach(function(b){b.classList.toggle('on',b===t);});
-    show.querySelectorAll('.show-cat').forEach(function(c){c.classList.toggle('on',c.dataset.cat===t.dataset.cat);});
+  var badge='<span class="show-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>360&deg;</span>';
+  var arrows='<button class="show-arrow prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m15 18-6-6 6-6"/></svg></button><button class="show-arrow next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6 6 6-6 6"/></svg></button>';
+  var cat='tour',idx=0;
+  function media(it){return it.type==='video'?'<video autoplay muted loop playsinline poster="'+(it.poster||'')+'"><source src="'+it.src+'" type="video/mp4"></video>':'<img src="'+it.src+'" alt="">';}
+  function render(){
+    var g=GAL[cat],it=g.items[idx];
+    stage.innerHTML=media(it)+(it.badge?badge:'')+arrows;
+    word.textContent=g.word;
+    thumbs.innerHTML=g.items.map(function(x,n){return '<button class="show-thumb'+(n===idx?' on':'')+'" data-i="'+n+'" aria-label="View '+(n+1)+'"><img src="'+(x.type==='video'?(x.poster||''):x.src)+'" alt=""></button>';}).join('');
+    [].slice.call(thumbs.querySelectorAll('.show-thumb')).forEach(function(b){b.addEventListener('click',function(){idx=+b.dataset.i;render();});});
+    stage.querySelector('.show-arrow.prev').addEventListener('click',function(){idx=(idx-1+g.items.length)%g.items.length;render();});
+    stage.querySelector('.show-arrow.next').addEventListener('click',function(){idx=(idx+1)%g.items.length;render();});
     kick();
-  });});
-  function activeTrack(){var c=show.querySelector('.show-cat.on');return c?c.querySelector('.show-track'):null;}
-  function stepW(tr){var s=tr.querySelector('.show-slide');return s?s.getBoundingClientRect().width+16:400;}
-  var prev=show.querySelector('.show-arrow.prev'),next=show.querySelector('.show-arrow.next');
-  prev.addEventListener('click',function(){var tr=activeTrack();if(tr)tr.scrollBy({left:-stepW(tr),behavior:'smooth'});});
-  next.addEventListener('click',function(){var tr=activeTrack();if(tr)tr.scrollBy({left:stepW(tr),behavior:'smooth'});});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(b){b.classList.toggle('on',b===t);});cat=t.dataset.cat;idx=0;render();});});
+  render();
 })();
 
 /* Parallax — hero video + cinematic band */
