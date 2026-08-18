@@ -114,6 +114,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .secnav a.active{color:var(--ink)}
 .secnav a.active::after{transform:scaleX(1)}
 @media(max-width:760px){.secnav-inner{justify-content:flex-start;gap:22px;padding:0 22px}.secnav a{font-size:13px;padding:14px 0}}
+/* mobile gutters: match site standard 24px (nav, hero, sections, footer) */
+@media(max-width:980px){:root{--pad:24px}.secnav-inner{padding:0 24px}}
 
 /* ===== SUPPORT (intro + feature cards) ===== */
 .support{padding:104px 0 96px}
@@ -142,6 +144,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   background:linear-gradient(0deg,rgba(10,16,20,.72) 0%,rgba(10,16,20,.15) 46%,rgba(10,16,20,0) 70%),
              linear-gradient(180deg,rgba(10,16,20,.32),rgba(10,16,20,0) 30%)}
 .cine-inner{position:relative;z-index:2;max-width:var(--maxw);width:100%;margin:0 auto;padding:0 40px 72px}
+@media(max-width:980px){.cine-inner{padding:0 24px 72px}}
 .cine-inner .in-box{max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px}
 .cine h2{font-family:'Mesmerize',sans-serif;font-weight:300;text-transform:uppercase;font-size:28px;line-height:40px;color:#fff}
 .cine p{color:rgba(255,255,255,.9);font-size:17px;line-height:27px;max-width:600px;margin:0 auto}
