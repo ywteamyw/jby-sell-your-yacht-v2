@@ -787,22 +787,29 @@ document.querySelectorAll('.expo-list').forEach(list=>{
   });
 })();
 
-/* Testimonials — editorial column slider (arrows scroll right / left) */
+/* Testimonials — editorial column slider with SEAMLESS INFINITE loop */
 (function(){
   var track=document.getElementById('tmonTrack');if(!track)return;
   var prev=document.querySelector('.tmon-btn.prev'),next=document.querySelector('.tmon-btn.next');
+  /* clone the whole set once; the two copies are pixel-identical, so jumping by one set width is invisible */
+  [].slice.call(track.children).forEach(function(c){track.appendChild(c.cloneNode(true));});
   function step(){var c=track.querySelector('.tmon-q');return c?Math.round(c.getBoundingClientRect().width):320;}
-  function upd(){
-    var max=track.scrollWidth-track.clientWidth-2;
-    if(prev)prev.disabled=track.scrollLeft<=2;
-    if(next)next.disabled=track.scrollLeft>=max;
-  }
   function page(){return (window.innerWidth<=760?1:2)*step();}
-  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-page(),behavior:'smooth'});});
+  function oneSet(){return track.scrollWidth/2;}
+  var settleTmr;
+  track.addEventListener('scroll',function(){
+    clearTimeout(settleTmr);
+    settleTmr=setTimeout(function(){
+      var one=oneSet();
+      if(track.scrollLeft>=one)track.scrollLeft-=one;      /* looped past the end -> back into copy 1 */
+      else if(track.scrollLeft<1)track.scrollLeft+=one;    /* sit inside copy 2 so prev always has room */
+    },140);
+  },{passive:true});
+  if(prev)prev.addEventListener('click',function(){
+    if(track.scrollLeft<page()+1)track.scrollLeft+=oneSet(); /* hop to identical spot in copy 2 first */
+    track.scrollBy({left:-page(),behavior:'smooth'});
+  });
   if(next)next.addEventListener('click',function(){track.scrollBy({left:page(),behavior:'smooth'});});
-  track.addEventListener('scroll',upd,{passive:true});
-  window.addEventListener('resize',upd);
-  upd();
 })();
 </script>
 </body>
