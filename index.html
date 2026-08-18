@@ -218,11 +218,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tmon{padding:96px 0;background:var(--section)}
 .tmon-head{text-align:center;margin:0 auto 40px}
 .tmon-head h2{color:var(--ink)}
-.tmon-view{overflow:hidden}
+.tmon-view{position:relative;overflow:hidden}
+.tmon-view::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;pointer-events:none}
 .tmon-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
 .tmon-track::-webkit-scrollbar{display:none}
-.tmon-q{flex:0 0 50%;scroll-snap-align:start;padding:0 clamp(28px,3.5vw,60px);display:flex;flex-direction:column;gap:22px;border-left:1px solid var(--line)}
-.tmon-q:first-child{border-left:0}
+.tmon-q{flex:0 0 50%;scroll-snap-align:start;padding:0 clamp(28px,3.5vw,60px);display:flex;flex-direction:column;gap:22px}
 .tmon-q blockquote{margin:0;font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:19px;line-height:31px;color:var(--ink)}
 .tmon-q .who{display:flex;flex-direction:column;gap:3px;margin-top:auto}
 .tmon-q .who .nm{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
@@ -233,7 +233,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tmon-btn:disabled{opacity:.32;cursor:default}
 .tmon-btn:disabled:hover{border-color:var(--border);color:var(--ink)}
 .tmon-btn svg{width:20px;height:20px;display:block}
-@media(max-width:760px){.tmon-q{flex-basis:100%;padding:0;border-left:0}}
+@media(max-width:760px){.tmon-q{flex-basis:100%;padding:0}.tmon-view::before{display:none}}
 
 /* ===== CONTACT / VALUATION ===== */
 .contact{padding:96px 0 104px}
@@ -639,7 +639,7 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden)kick
     var g=GAL[cat],it=g.items[idx];
     var thumbsHTML=g.items.map(function(x,n){return '<button class="show-thumb'+(n===idx?' on':'')+'" data-i="'+n+'" aria-label="View '+(n+1)+'"><img src="'+(x.type==='video'?(x.poster||''):x.src)+'" alt=""></button>';}).join('');
     var overlay=(cat==='tour')
-      ?'<div class="show-cta"><span class="show-cta-eye">360&deg; Virtual tour</span><h3 class="show-cta-h">'+(it.title||'')+'</h3>'+tourBtn+'</div>'
+      ?'<div class="show-cta"><h3 class="show-cta-h">'+(it.title||'')+'</h3>'+tourBtn+'</div>'
       :'<div class="show-word">'+g.word+'</div>';
     stage.innerHTML=media(it)+arrows+overlay+'<div class="show-thumbs">'+thumbsHTML+'</div>';
     [].slice.call(stage.querySelectorAll('.show-thumb')).forEach(function(b){b.addEventListener('click',function(){idx=+b.dataset.i;render();});});
