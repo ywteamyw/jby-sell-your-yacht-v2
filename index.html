@@ -234,11 +234,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tmon-head{text-align:center;margin:0 auto 40px}
 .tmon-head h2{color:var(--ink)}
 .tmon-view{position:relative;overflow:hidden}
-.tmon-view::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);z-index:2;pointer-events:none;transform-origin:center;transition:opacity .35s ease,transform .35s ease}
-.tmon-view.scrolling::before{opacity:0;transform:scaleY(.5)}
 .tmon-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
 .tmon-track::-webkit-scrollbar{display:none}
 .tmon-q{flex:0 0 50%;scroll-snap-align:start;padding:0 clamp(28px,3.5vw,60px);display:flex;flex-direction:column;gap:22px}
+/* divider belongs to the 2nd card of each pair, so it travels with the pair (no fixed line) */
+.tmon-q:nth-child(even){border-left:1px solid var(--line)}
 .tmon-q blockquote{margin:0;font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:19px;line-height:31px;color:var(--ink)}
 .tmon-q .who{display:flex;flex-direction:column;gap:3px;margin-top:auto}
 .tmon-q .who .nm{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
@@ -249,7 +249,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tmon-btn:disabled{opacity:.32;cursor:default}
 .tmon-btn:disabled:hover{border-color:var(--border);color:var(--ink)}
 .tmon-btn svg{width:20px;height:20px;display:block}
-@media(max-width:760px){.tmon-q{flex-basis:100%;padding:0}.tmon-view::before{display:none}}
+@media(max-width:760px){.tmon-q{flex-basis:100%;padding:0}.tmon-q:nth-child(even){border-left:0}}
 
 /* ===== CONTACT / VALUATION ===== */
 .contact{padding:96px 0 104px}
@@ -798,10 +798,10 @@ document.querySelectorAll('.expo-list').forEach(list=>{
     if(prev)prev.disabled=track.scrollLeft<=2;
     if(next)next.disabled=track.scrollLeft>=max;
   }
-  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-step(),behavior:'smooth'});});
-  if(next)next.addEventListener('click',function(){track.scrollBy({left:step(),behavior:'smooth'});});
-  var view=track.parentElement,scrollTmr;
-  track.addEventListener('scroll',function(){upd();view.classList.add('scrolling');clearTimeout(scrollTmr);scrollTmr=setTimeout(function(){view.classList.remove('scrolling');},200);},{passive:true});
+  function page(){return (window.innerWidth<=760?1:2)*step();}
+  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-page(),behavior:'smooth'});});
+  if(next)next.addEventListener('click',function(){track.scrollBy({left:page(),behavior:'smooth'});});
+  track.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
   upd();
 })();
